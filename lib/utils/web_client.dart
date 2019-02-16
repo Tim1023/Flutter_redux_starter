@@ -4,7 +4,7 @@ import 'dart:core';
 import 'package:http/http.dart' as http;
 
 class WebClient {
-  static String baseUrl = 'http://127.0.0.1:7001';
+  static String baseUrl = 'http://192.168.178.36:7001';
 
   const WebClient();
 
@@ -21,14 +21,13 @@ class WebClient {
   Future<dynamic> post(String path, Map<String, dynamic> data) async {
     final http.Response response = await http.Client().post(
       '$baseUrl$path',
-      body: data,
+      body: jsonEncode(data),
+      headers: {'content-type': 'application/json'},
     );
-
     if (response.statusCode == 200) {
       return json.decode(response.body);
     } else {
       throw Exception('An error occured: ' + response.body);
     }
   }
-
 }

@@ -10,9 +10,9 @@ class UserLoginRequest {
 }
 
 class UserLoginSuccess {
-  final String token;
+  final Map<String, dynamic> user;
 
-  UserLoginSuccess({this.token});
+  UserLoginSuccess({this.user});
 }
 
 class UserLoaded {

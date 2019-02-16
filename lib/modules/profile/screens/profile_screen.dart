@@ -14,7 +14,40 @@ class ProfileScreen extends StatelessWidget {
       converter: (Store<AppState> store) => _ViewModel.fromStore(store),
       builder: (BuildContext context, _ViewModel viewModel) {
         if (viewModel.isAuthenticated) {
-          return Center(child: LogoutButton());
+          return  Column(
+            children: [
+              Padding(
+                padding:
+                const EdgeInsets.fromLTRB(30.0, 20.0, 30.0, 30.0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Column(
+                      crossAxisAlignment:
+                      CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Image.network(
+                          viewModel.avatar,
+                        ),
+                        Text(
+                          viewModel.username,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20.0,
+                          ),
+                        ),
+                        Text(
+                          viewModel.email,
+                        ),
+                        LogoutButton(),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          );
         } else {
           return LoginScreen();
         }
@@ -25,14 +58,24 @@ class ProfileScreen extends StatelessWidget {
 
 class _ViewModel {
   final bool isAuthenticated;
+  final String username;
+  final String email;
+  final String avatar;
+
 
   _ViewModel({
     @required this.isAuthenticated,
+    this.username,
+    this.email,
+    this.avatar,
   });
 
   static _ViewModel fromStore(Store<AppState> store) {
     return _ViewModel(
       isAuthenticated: store.state.authState.isAuthenticated,
+      username: store.state.authState?.user?.username,
+      email: store.state.authState?.user?.email,
+      avatar: store.state.authState?.user?.avatar,
     );
   }
 }

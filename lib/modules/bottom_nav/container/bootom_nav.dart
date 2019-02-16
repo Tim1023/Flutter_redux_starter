@@ -4,9 +4,7 @@ import 'package:onigiri_app/modules/bottom_nav/store/actions.dart';
 import 'package:onigiri_app/store/state.dart';
 import 'package:redux/redux.dart';
 
-
 class BottomNav extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, _ViewModel>(
@@ -14,10 +12,10 @@ class BottomNav extends StatelessWidget {
       converter: (Store<AppState> store) => _ViewModel.fromStore(store),
       builder: (BuildContext context, _ViewModel viewModel) {
         return BottomNavigationBar(
-          currentIndex: viewModel.selectedBottomNav,
-          onTap: viewModel.onBottomNavSelected,
-          items: _getItems(),
-        );
+            currentIndex: viewModel.selectedBottomNav,
+            onTap: viewModel.onBottomNavSelected,
+            items: _getItems(),
+            type: BottomNavigationBarType.fixed);
       },
     );
   }
@@ -26,11 +24,15 @@ class BottomNav extends StatelessWidget {
     return <BottomNavigationBarItem>[
       BottomNavigationBarItem(
         icon: Icon(Icons.list),
-        title: Text('Screen 1'),
+        title: Text('Discovery'),
       ),
       BottomNavigationBarItem(
         icon: Icon(Icons.person),
-        title: Text('Screen 2'),
+        title: Text('Store'),
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.vibration),
+        title: Text('Deals'),
       ),
       BottomNavigationBarItem(
         icon: Icon(Icons.vibration),
@@ -52,7 +54,8 @@ class _ViewModel {
   static _ViewModel fromStore(Store<AppState> store) {
     return _ViewModel(
       selectedBottomNav: store.state.navState.selectedBottomNav,
-      onBottomNavSelected: (int index) => store.dispatch(ChangeBottomNavAction(index: index)),
+      onBottomNavSelected: (int index) =>
+          store.dispatch(ChangeBottomNavAction(index: index)),
     );
   }
 }
