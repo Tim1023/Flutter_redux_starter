@@ -25,7 +25,12 @@ class AuthMiddleware {
 
     if (await _hasToken()) {
       store.dispatch(UserLoaded(
-          user: User(token: await _getToken())
+          user: User(
+              token: await _getToken(),
+              username: await _getItem('username'),
+              email: await _getItem('email'),
+              avatar: await _getItem('image'),
+          )
       ));
     }
 
@@ -38,6 +43,7 @@ class AuthMiddleware {
     try {
       final Map<String, dynamic> authData = await repository.login(action.email, action.password);
       _persistToken(authData['user']['token']);
+      _persistUser(authData['user']);
       store.dispatch(UserLoginSuccess(
           user: authData['user']
       ));
@@ -73,6 +79,11 @@ class AuthMiddleware {
     return prefs.getString('token');
   }
 
+  Future<String> _getItem(String key) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString(key);
+  }
+
   Future<void> _deleteToken() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.remove('token');
@@ -83,6 +94,14 @@ class AuthMiddleware {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('token', token);
     print('Token: $token');
+  }
+
+  Future<void> _persistUser(Map<String, dynamic> user) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    print(user);
+    await prefs.setString('username', user['username']);
+    await prefs.setString('email', user['email']);
+    await prefs.setString('image', user['image']);
   }
 
   Future<bool> _hasToken() async {

@@ -28,17 +28,17 @@ class ProfileScreen extends StatelessWidget {
                       CrossAxisAlignment.start,
                       children: <Widget>[
                         Image.network(
-                          viewModel.avatar,
+                          viewModel.avatar ?? '',
                         ),
                         Text(
-                          viewModel.username,
+                          viewModel.username ?? '',
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 20.0,
                           ),
                         ),
                         Text(
-                          viewModel.email,
+                          viewModel.email ?? '',
                         ),
                         LogoutButton(),
                       ],
