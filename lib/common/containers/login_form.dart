@@ -84,13 +84,9 @@ class LoginFormState extends State<LoginForm> {
               };
             },
             builder: (BuildContext context, OnLoginCallback onLogin) {
-              return MaterialButton(
-                elevation: 5.0,
-                minWidth: 200.0,
-                height: 42.0,
-                color: Colors.blue,
-                child: Text('Login',
-                    style: TextStyle(fontSize: 20.0, color: Colors.white)),
+              return RaisedButton(
+                elevation: 8.0,
+                child: Text('Login'),
                 onPressed: () {
                   onLogin(_emailController.text, _passwordController.text);
                 },

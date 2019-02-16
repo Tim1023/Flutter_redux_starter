@@ -23,19 +23,23 @@ class BottomNav extends StatelessWidget {
   List<BottomNavigationBarItem> _getItems() {
     return <BottomNavigationBarItem>[
       BottomNavigationBarItem(
-        icon: Icon(Icons.list),
+        icon: Icon(Icons.home),
         title: Text('Discovery'),
       ),
       BottomNavigationBarItem(
-        icon: Icon(Icons.person),
-        title: Text('Store'),
+        icon: Icon(Icons.store),
+        title: Text('Merchants'),
       ),
       BottomNavigationBarItem(
-        icon: Icon(Icons.vibration),
+        icon: Text(''),
+        title: Text(''),
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.local_offer),
         title: Text('Deals'),
       ),
       BottomNavigationBarItem(
-        icon: Icon(Icons.vibration),
+        icon: Icon(Icons.person),
         title: Text('Profile'),
       ),
     ];

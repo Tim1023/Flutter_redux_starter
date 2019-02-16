@@ -10,6 +10,12 @@ class MainLayout extends StatelessWidget {
       appBar: _createAppBar(),
       body: RootScreen(),
       bottomNavigationBar: BottomNav(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () { },
+        tooltip: 'Increment',
+        child: Icon(Icons.add),
+      ),
     );
   }
 
