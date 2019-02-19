@@ -1,5 +1,6 @@
 
 import 'package:onigiri_app/modules/auth/store/middleware.dart';
+import 'package:onigiri_app/modules/discovery/store/middleware.dart';
 import 'package:onigiri_app/store/state.dart';
 import 'package:redux/redux.dart';
 import 'package:onigiri_app/store/reducers.dart';
@@ -10,7 +11,9 @@ Store<AppState> createStore() {
     initialState: AppState.initial(),
     middleware: []
       ..addAll(AuthMiddleware().createAuthMiddleware())
-      ..addAll(AppMiddleware().createAppMiddleware()),
+      ..addAll(AppMiddleware().createAppMiddleware())
+      ..addAll(DiscoveryMiddleware().createDiscoveryMiddleware()),
+
   );
 }
 
